@@ -5,13 +5,16 @@ import main.java.com.mitsko.unit2.entity.Cube;
 import main.java.com.mitsko.unit2.exception.CanNotCreateCubException;
 import main.java.com.mitsko.unit2.logic.CubeLogic;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
+        ArrayList<Cube> cubes = new ArrayList<Cube>();
         try {
             Controller controller = Controller.getInstance();
-            Cube cube = controller.createCube();
+            cubes = controller.createCube();
             CubeLogic cubeLogic = new CubeLogic();
-            cubeLogic.isCube(cube);
+            System.out.println(cubeLogic.isCube(cubes.get(0)));
         }catch (Exception | CanNotCreateCubException ex){
             ex.printStackTrace();
         }
