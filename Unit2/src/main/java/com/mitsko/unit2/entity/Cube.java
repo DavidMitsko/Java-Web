@@ -13,6 +13,7 @@ public class Cube implements Observable {
 
     public Cube(Point[] points) {
         this.points = points;
+        this.id = 0;
     }
 
     public Point[] getPoints() {
@@ -21,6 +22,8 @@ public class Cube implements Observable {
 
     public void setPoints(Point[] points) {
         this.points = points;
+        this.changed = true;
+        notifyObserver();
     }
 
     public Point getPoint(int index){
@@ -29,6 +32,8 @@ public class Cube implements Observable {
 
     public void setPoint(Point point, int index){
         points[index] = point;
+        this.changed = true;
+        notifyObserver();
     }
 
     public int getId() {
@@ -37,6 +42,8 @@ public class Cube implements Observable {
 
     public void setId(int id) {
         this.id = id;
+        this.changed = true;
+        notifyObserver();
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CubeStorage implements Observer<Cube> {
-    private Map<Integer, CubeRegistration> map = new HashMap<Integer, CubeRegistration>();
+    private static Map<Integer, CubeRegistration> map = new HashMap<Integer, CubeRegistration>();
     private static CubeStorage instance;
 
     private CubeStorage(){}
@@ -35,5 +35,13 @@ public class CubeStorage implements Observer<Cube> {
             cubeRegistration.setSquare(square);
             cubeRegistration.setVolume(volume);
         }
+    }
+
+    public static Map<Integer, CubeRegistration> getMap() {
+        return map;
+    }
+
+    public static void setMap(Map<Integer, CubeRegistration> newMap) {
+        map = newMap;
     }
 }
