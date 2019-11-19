@@ -16,7 +16,7 @@ import java.util.Iterator;
 class CubeLogicTest {
     Cube cube;
     Point[] plane = new Point[3];
-    CubeLogic cubeLogic = new CubeLogic();
+    CubeLogic cubeLogic = CubeLogic.getInstance();
 
     private final double DELTA = 0.1;
 
@@ -36,7 +36,6 @@ class CubeLogicTest {
 
         Iterator<String> iterator = arrayList.iterator();
         boolean flag = false;
-
         while(!flag || iterator.hasNext()) {
             String temp = iterator.next();
             int j = 0;

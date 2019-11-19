@@ -4,6 +4,19 @@ import main.java.com.mitsko.unit2.entity.Cube;
 import main.java.com.mitsko.unit2.entity.Point;
 
 public class CubeLogic {
+    private static CubeLogic instance = null;
+
+    private CubeLogic(){
+
+    }
+
+    public static CubeLogic getInstance(){
+        if(instance == null){
+            instance = new CubeLogic();
+        }
+        return instance;
+    }
+
     public int calculateVolume(Cube cube){
         int side = calculateSide(cube);
         return (int)Math.pow(side, 3);

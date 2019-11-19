@@ -1,9 +1,15 @@
 package main.java.com.mitsko.unit2.entity;
 
+import main.java.com.mitsko.unit2.observer.Observable;
+import main.java.com.mitsko.unit2.observer.Observer;
+
 import java.util.Arrays;
 
-public class Cube {
+public class Cube implements Observable {
+    private int id;
     private Point[] points;
+    private Observer cubeObserver;
+    private boolean changed;
 
     public Cube(Point[] points) {
         this.points = points;
@@ -23,6 +29,33 @@ public class Cube {
 
     public void setPoint(Point point, int index){
         points[index] = point;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public void register(Observer obj){
+        this.cubeObserver = obj;
+    }
+
+    @Override
+    public void unregister(){
+        this.cubeObserver = null;
+    }
+
+    @Override
+    public void notifyObserver(){
+        if(!this.changed){
+            return;
+        }
+        this.changed = false;
+        cubeObserver.update(this);
     }
 
     @Override
