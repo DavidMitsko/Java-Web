@@ -1,4 +1,4 @@
-package main.java.com.mitsko.unit2.entity;
+package main.java.com.mitsko.unit2.entity.impl;
 
 public class CubeRegistration {
     private int volume;

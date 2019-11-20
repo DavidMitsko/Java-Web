@@ -2,8 +2,8 @@ package main.java.com.mitsko.unit2.controller;
 
 import main.java.com.mitsko.unit2.utils.DataParser;
 import main.java.com.mitsko.unit2.dao.ReadFile;
-import main.java.com.mitsko.unit2.entity.Cube;
-import main.java.com.mitsko.unit2.entity.Point;
+import main.java.com.mitsko.unit2.entity.impl.CubeImpl;
+import main.java.com.mitsko.unit2.entity.impl.Point;
 import main.java.com.mitsko.unit2.exception.CanNotCreateCubException;
 import main.java.com.mitsko.unit2.exception.DAOException;
 import main.java.com.mitsko.unit2.utils.StringParser;
@@ -30,9 +30,9 @@ public class Controller {
         return instance;
     }
 
-    public ArrayList<Cube> createCube() throws CanNotCreateCubException {
+    public ArrayList<CubeImpl> createCube() throws CanNotCreateCubException {
         ArrayList<String> arrayList = new ArrayList<String>();
-        ArrayList<Cube> cubes = new ArrayList<Cube>();
+        ArrayList<CubeImpl> cubeImpls = new ArrayList<CubeImpl>();
 
 
         try{
@@ -54,14 +54,14 @@ public class Controller {
                         arrayPoints[i] = new Point(array[j], array[j + 1], array[j + 2]);
                         j += 3;
                     }
-                    cubes.add(new Cube(arrayPoints));
+                    cubeImpls.add(new CubeImpl(arrayPoints));
                     flag = true;
                     logger.info("create cube");
                 }
             }
         }
         if(flag){
-            return cubes;
+            return cubeImpls;
         }else {
             throw new CanNotCreateCubException("Error");
         }

@@ -1,11 +1,12 @@
 package test.java;
 
 import main.java.com.mitsko.unit2.dao.ReadFile;
-import main.java.com.mitsko.unit2.entity.Cube;
-import main.java.com.mitsko.unit2.entity.Point;
+import main.java.com.mitsko.unit2.entity.impl.CubeImpl;
+import main.java.com.mitsko.unit2.entity.impl.Point;
 import main.java.com.mitsko.unit2.exception.DAOException;
 import main.java.com.mitsko.unit2.logic.CubeLogic;
 import main.java.com.mitsko.unit2.observer.Observer;
+import main.java.com.mitsko.unit2.observer.impl.ObservableImpl;
 import main.java.com.mitsko.unit2.storage.CubeStorage;
 import main.java.com.mitsko.unit2.utils.DataParser;
 import main.java.com.mitsko.unit2.utils.StringParser;
@@ -17,7 +18,7 @@ import java.util.Iterator;
 
 class CubeStorageTest {
 
-    Cube cube;
+    ObservableImpl observable;
     CubeLogic cubeLogic = CubeLogic.getInstance();
     ReadFile readFile = new ReadFile();
     DataParser dataParser = DataParser.getInstance();
@@ -49,7 +50,7 @@ class CubeStorageTest {
                         arrayPoints[i] = new Point(array[j], array[j + 1], array[j + 2]);
                         j += 3;
                     }
-                    cube = new Cube(arrayPoints);
+                    observable = new ObservableImpl(new CubeImpl(arrayPoints));
                     flag = true;
                 }
             }
@@ -58,8 +59,8 @@ class CubeStorageTest {
 
     @Test
     void observeOfCube(){
-        Observer<Cube> cubeStorage = CubeStorage.getInstance();
-        cube.register(cubeStorage);
+        Observer<CubeImpl> cubeStorage = CubeStorage.getInstance();
+        observable.register(cubeStorage);
 
         Point[] arrayPoints = new Point[8];
         boolean flag = false;
@@ -78,9 +79,9 @@ class CubeStorageTest {
             }
         }
 
-        cube.setPoints(arrayPoints);
-        int expected = cubeLogic.calculateVolume(cube);
-        int actual = CubeStorage.getMap().get(cube.getId()).getVolume();
+        observable.setPoints(arrayPoints);
+        int expected = cubeLogic.calculateVolume(observable.getCube());
+        int actual = CubeStorage.getMap().get(observable.getId()).getVolume();
         Assert.assertEquals(expected, actual);
     }
 

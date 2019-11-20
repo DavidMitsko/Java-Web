@@ -2,8 +2,8 @@ package test.java;
 
 import main.java.com.mitsko.unit2.utils.DataParser;
 import main.java.com.mitsko.unit2.dao.ReadFile;
-import main.java.com.mitsko.unit2.entity.Cube;
-import main.java.com.mitsko.unit2.entity.Point;
+import main.java.com.mitsko.unit2.entity.impl.CubeImpl;
+import main.java.com.mitsko.unit2.entity.impl.Point;
 import main.java.com.mitsko.unit2.exception.DAOException;
 import main.java.com.mitsko.unit2.logic.CubeLogic;
 import main.java.com.mitsko.unit2.utils.StringParser;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 class CubeLogicTest {
-    Cube cube;
+    CubeImpl cubeImpl;
     Point[] plane = new Point[3];
     CubeLogic cubeLogic = CubeLogic.getInstance();
 
@@ -47,7 +47,7 @@ class CubeLogicTest {
                         arrayPoints[i] = new Point(array[j], array[j + 1], array[j + 2]);
                         j += 3;
                     }
-                    cube = new Cube(arrayPoints);
+                    cubeImpl = new CubeImpl(arrayPoints);
                     flag = true;
                 }
                 else{
@@ -64,7 +64,7 @@ class CubeLogicTest {
     @Test
     void calculateVolume() {
         int expected = 27;
-        int actual = cubeLogic.calculateVolume(cube);
+        int actual = cubeLogic.calculateVolume(cubeImpl);
         Assert.assertEquals(expected, actual);
 
     }
@@ -72,19 +72,19 @@ class CubeLogicTest {
     @Test
     void calculateAllSquare() {
         int expected = 54;
-        int actual = cubeLogic.calculateAllSquare(cube);
+        int actual = cubeLogic.calculateAllSquare(cubeImpl);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     void isCube() {
-        Assert.assertTrue(cubeLogic.isCube(cube));
+        Assert.assertTrue(cubeLogic.isCube(cubeImpl));
     }
 
     @Test
     void volumeOfPart() {
         double expected = (double)1 / 3;
-        double actual = cubeLogic.volumeOfPart(cube, plane);
+        double actual = cubeLogic.volumeOfPart(cubeImpl, plane);
         Assert.assertEquals(expected, actual, DELTA);
     }
 }
