@@ -1,6 +1,6 @@
-package main.java.com.mitsko.unit2.exception;
+package com.mitsko.unit2.exception;
 
-public class CanNotCreateCubException extends Throwable {
+public class CanNotCreateCubException extends Exception {
     public CanNotCreateCubException() {
     }
 

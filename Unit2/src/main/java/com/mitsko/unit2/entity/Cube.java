@@ -1,6 +1,6 @@
-package main.java.com.mitsko.unit2.entity;
+package com.mitsko.unit2.entity;
 
-import main.java.com.mitsko.unit2.entity.impl.Point;
+import com.mitsko.unit2.entity.impl.Point;
 
 public interface Cube {
     Point[] getPoints();

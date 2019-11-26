@@ -1,14 +1,14 @@
-package main.java.com.mitsko.unit2.storage;
+package com.mitsko.unit2.storage;
 
-import main.java.com.mitsko.unit2.entity.impl.CubeImpl;
-import main.java.com.mitsko.unit2.entity.impl.CubeRegistration;
-import main.java.com.mitsko.unit2.logic.CubeLogic;
-import main.java.com.mitsko.unit2.observer.Observer;
+import com.mitsko.unit2.entity.Cube;
+import com.mitsko.unit2.entity.impl.CubeRegistration;
+import com.mitsko.unit2.observer.Observer;
+import com.mitsko.unit2.service.CubeLogic;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CubeStorage implements Observer<CubeImpl> {
+public class CubeStorage implements Observer<Cube> {
     private static Map<Integer, CubeRegistration> map = new HashMap<Integer, CubeRegistration>();
     private static CubeStorage instance;
 
@@ -22,7 +22,7 @@ public class CubeStorage implements Observer<CubeImpl> {
     }
 
     @Override
-    public void update(CubeImpl obj){
+    public void update(Cube obj){
         CubeRegistration cubeRegistration;
         CubeLogic cubeLogic = CubeLogic.getInstance();
         int volume = cubeLogic.calculateVolume(obj);

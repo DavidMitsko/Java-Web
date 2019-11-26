@@ -1,6 +1,6 @@
-package main.java.com.mitsko.unit2.exception;
+package com.mitsko.unit2.exception;
 
-public class DAOException extends Throwable {
+public class DAOException extends Exception {
     public DAOException() {
     }
 

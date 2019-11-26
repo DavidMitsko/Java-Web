@@ -1,15 +1,15 @@
-package main.java.com.mitsko.unit2.observer.impl;
+package com.mitsko.unit2.observer.impl;
 
-import main.java.com.mitsko.unit2.entity.Cube;
-import main.java.com.mitsko.unit2.entity.impl.CubeImpl;
-import main.java.com.mitsko.unit2.entity.impl.Point;
-import main.java.com.mitsko.unit2.observer.Observable;
-import main.java.com.mitsko.unit2.observer.Observer;
+import com.mitsko.unit2.entity.Cube;
+import com.mitsko.unit2.entity.impl.CubeImpl;
+import com.mitsko.unit2.entity.impl.Point;
+import com.mitsko.unit2.observer.Observable;
+import com.mitsko.unit2.observer.Observer;
 
-public class ObservableImpl implements Observable<CubeImpl>, Cube {
+public class ObservableImpl implements Observable<Cube>, Cube {
     private CubeImpl cube;
 
-    private Observer<CubeImpl> cubeObserver;
+    private Observer<Cube> cubeObserver;
     private boolean changed;
 
     public ObservableImpl(CubeImpl cube) {
@@ -17,7 +17,7 @@ public class ObservableImpl implements Observable<CubeImpl>, Cube {
     }
 
     @Override
-    public void register(Observer<CubeImpl> obj){
+    public void register(Observer<Cube> obj){
         this.cubeObserver = obj;
     }
 

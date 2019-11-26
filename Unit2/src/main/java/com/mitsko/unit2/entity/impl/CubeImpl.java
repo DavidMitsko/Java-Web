@@ -1,8 +1,6 @@
-package main.java.com.mitsko.unit2.entity.impl;
+package com.mitsko.unit2.entity.impl;
 
-import main.java.com.mitsko.unit2.entity.Cube;
-import main.java.com.mitsko.unit2.observer.Observable;
-import main.java.com.mitsko.unit2.observer.Observer;
+import com.mitsko.unit2.entity.Cube;
 
 import java.util.Arrays;
 

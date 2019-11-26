@@ -1,4 +1,4 @@
-package main.java.com.mitsko.unit2.entity.impl;
+package com.mitsko.unit2.entity.impl;
 
 public class Point {
     private int x;

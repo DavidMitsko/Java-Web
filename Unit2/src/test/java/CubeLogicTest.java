@@ -1,12 +1,10 @@
-package test.java;
-
-import main.java.com.mitsko.unit2.utils.DataParser;
-import main.java.com.mitsko.unit2.dao.ReadFile;
-import main.java.com.mitsko.unit2.entity.impl.CubeImpl;
-import main.java.com.mitsko.unit2.entity.impl.Point;
-import main.java.com.mitsko.unit2.exception.DAOException;
-import main.java.com.mitsko.unit2.logic.CubeLogic;
-import main.java.com.mitsko.unit2.utils.StringParser;
+import com.mitsko.unit2.exception.DataFormatException;
+import com.mitsko.unit2.service.utils.ReadFile;
+import com.mitsko.unit2.entity.impl.CubeImpl;
+import com.mitsko.unit2.entity.impl.Point;
+import com.mitsko.unit2.exception.DAOException;
+import com.mitsko.unit2.service.CubeLogic;
+import com.mitsko.unit2.service.utils.StringParser;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -14,48 +12,55 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 class CubeLogicTest {
-    CubeImpl cubeImpl;
-    Point[] plane = new Point[3];
-    CubeLogic cubeLogic = CubeLogic.getInstance();
+    private CubeImpl cubeImpl;
+    private Point[] plane = new Point[3];
+    private CubeLogic cubeLogic = CubeLogic.getInstance();
 
     private final double DELTA = 0.1;
 
-    public CubeLogicTest(){
+    public CubeLogicTest() {
         ReadFile readFile = new ReadFile();
-        DataParser dataParser = DataParser.getInstance();
         StringParser stringParser = StringParser.getInstance();
 
         ArrayList<String> arrayList = new ArrayList<String>();
 
-        try{
+        try {
             arrayList = readFile.readAllFile("src/main/resources/info.txt");
-        }catch (DAOException ex){
+        } catch (DAOException ex) {
             ex.printStackTrace();
             System.exit(-1);
         }
 
         Iterator<String> iterator = arrayList.iterator();
         boolean flag = false;
-        while(!flag || iterator.hasNext()) {
+        while (!flag || iterator.hasNext()) {
             String temp = iterator.next();
             int j = 0;
-            if (dataParser.check(temp)){
-                if(temp.length() > 20) {
+            try {
+                if (temp.length() > 20) {
                     int[] array = stringParser.parseString(temp, 24);
                     Point[] arrayPoints = new Point[8];
+
                     for (int i = 0; i < 8; i++) {
                         arrayPoints[i] = new Point(array[j], array[j + 1], array[j + 2]);
                         j += 3;
                     }
+
                     cubeImpl = new CubeImpl(arrayPoints);
                     flag = true;
-                }
-                else{
+                } else {
                     int[] array = stringParser.parseString(temp, 9);
-                    for(int i = 0; i < plane.length; i++){
+
+                    for (int i = 0; i < plane.length; i++) {
                         plane[i] = new Point(array[j], array[j + 1], array[j + 2]);
                         j += 3;
                     }
+                }
+            } catch (DataFormatException ex) {
+                if(iterator.hasNext()) {
+                    continue;
+                } else {
+                    break;
                 }
             }
         }
@@ -83,7 +88,7 @@ class CubeLogicTest {
 
     @Test
     void volumeOfPart() {
-        double expected = (double)1 / 3;
+        double expected = (double) 1 / 3;
         double actual = cubeLogic.volumeOfPart(cubeImpl, plane);
         Assert.assertEquals(expected, actual, DELTA);
     }
