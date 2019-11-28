@@ -10,10 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReadFile {
-    private Logger logger = LogManager.getLogger(ReadFile.class.getName());
+public class PointsFileReader {
+    private Logger logger = LogManager.getLogger(PointsFileReader.class.getName());
 
-    public ReadFile() {
+    public PointsFileReader() {
     }
 
     public String readString(String filePath) throws DAOException {

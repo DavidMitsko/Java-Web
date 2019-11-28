@@ -1,10 +1,10 @@
 import com.mitsko.unit2.exception.DataFormatException;
-import com.mitsko.unit2.service.utils.ReadFile;
+import com.mitsko.unit2.service.utils.PointsFileReader;
 import com.mitsko.unit2.entity.impl.CubeImpl;
 import com.mitsko.unit2.entity.impl.Point;
 import com.mitsko.unit2.exception.DAOException;
 import com.mitsko.unit2.service.CubeLogic;
-import com.mitsko.unit2.service.utils.StringParser;
+import com.mitsko.unit2.service.utils.StringOfPointsParser;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +14,13 @@ import java.util.Iterator;
 class CubeLogicTest {
     private CubeImpl cubeImpl;
     private Point[] plane = new Point[3];
-    private CubeLogic cubeLogic = CubeLogic.getInstance();
+    private CubeLogic cubeLogic = new CubeLogic();//CubeLogic.getInstance();
 
     private final double DELTA = 0.1;
 
     public CubeLogicTest() {
-        ReadFile readFile = new ReadFile();
-        StringParser stringParser = StringParser.getInstance();
+        PointsFileReader readFile = new PointsFileReader();
+        StringOfPointsParser stringOfPointsParser = StringOfPointsParser.getInstance();
 
         ArrayList<String> arrayList = new ArrayList<String>();
 
@@ -38,7 +38,7 @@ class CubeLogicTest {
             int j = 0;
             try {
                 if (temp.length() > 20) {
-                    int[] array = stringParser.parseString(temp, 24);
+                    int[] array = stringOfPointsParser.parseString(temp, 24);
                     Point[] arrayPoints = new Point[8];
 
                     for (int i = 0; i < 8; i++) {
@@ -49,7 +49,7 @@ class CubeLogicTest {
                     cubeImpl = new CubeImpl(arrayPoints);
                     flag = true;
                 } else {
-                    int[] array = stringParser.parseString(temp, 9);
+                    int[] array = stringOfPointsParser.parseString(temp, 9);
 
                     for (int i = 0; i < plane.length; i++) {
                         plane[i] = new Point(array[j], array[j + 1], array[j + 2]);

@@ -3,14 +3,14 @@ package com.mitsko.unit2.service.utils;
 import com.mitsko.unit2.exception.DataFormatException;
 import org.apache.log4j.Logger;
 
-public class StringParser {
-    private static final StringParser instance = new StringParser();
-    private Logger logger = Logger.getLogger(StringParser.class);
+public class StringOfPointsParser {
+    private static final StringOfPointsParser instance = new StringOfPointsParser();
+    private Logger logger = Logger.getLogger(StringOfPointsParser.class);
 
-    private StringParser() {
+    private StringOfPointsParser() {
     }
 
-    public static StringParser getInstance() {
+    public static StringOfPointsParser getInstance() {
         return instance;
     }
 

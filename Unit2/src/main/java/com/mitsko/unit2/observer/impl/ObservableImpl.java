@@ -1,38 +1,37 @@
 package com.mitsko.unit2.observer.impl;
 
 import com.mitsko.unit2.entity.Cube;
-import com.mitsko.unit2.entity.impl.CubeImpl;
 import com.mitsko.unit2.entity.impl.Point;
 import com.mitsko.unit2.observer.Observable;
 import com.mitsko.unit2.observer.Observer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ObservableImpl implements Observable<Cube>, Cube {
-    private CubeImpl cube;
+    private Cube cube;
 
-    private Observer<Cube> cubeObserver;
-    private boolean changed;
+    private List<Observer<Cube>> cubeObserver = new ArrayList<>();
 
-    public ObservableImpl(CubeImpl cube) {
+    public ObservableImpl(Cube cube) {
         this.cube = cube;
     }
 
     @Override
     public void register(Observer<Cube> obj){
-        this.cubeObserver = obj;
+        this.cubeObserver.add(obj);
     }
 
     @Override
-    public void unregister(){
-        this.cubeObserver = null;
+    public void unregister(Observer<Cube> obj){
+        this.cubeObserver.remove(obj);
     }
 
     @Override
     public void notifyObserver(){
-        if(!this.changed){
-            return;
+        for(Observer<Cube> observer : cubeObserver) {
+            observer.update(cube);
         }
-        this.changed = false;
-        cubeObserver.update(cube);
     }
 
     @Override
@@ -43,7 +42,6 @@ public class ObservableImpl implements Observable<Cube>, Cube {
     @Override
     public void setPoints(Point[] points) {
         cube.setPoints(points);
-        this.changed = true;
         notifyObserver();
     }
 
@@ -55,7 +53,6 @@ public class ObservableImpl implements Observable<Cube>, Cube {
     @Override
     public void setPoint(Point point, int index) {
         cube.setPoint(point, index);
-        this.changed = true;
         notifyObserver();
     }
 
@@ -67,15 +64,14 @@ public class ObservableImpl implements Observable<Cube>, Cube {
     @Override
     public void setId(int id) {
         cube.setId(id);
-        this.changed = true;
         notifyObserver();
     }
 
-    public CubeImpl getCube() {
+    public Cube getCube() {
         return cube;
     }
 
-    public void setCube(CubeImpl cube) {
+    public void setCube(Cube cube) {
         this.cube = cube;
     }
 }

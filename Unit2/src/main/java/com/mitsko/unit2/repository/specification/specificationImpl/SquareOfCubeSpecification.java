@@ -15,7 +15,7 @@ public class SquareOfCubeSpecification implements Specification {
 
     @Override
     public boolean specify(Cube cube) {
-        CubeLogic cubeLogic = CubeLogic.getInstance();
+        CubeLogic cubeLogic = new CubeLogic();//CubeLogic.getInstance();
         int cubeSquare;
         cubeSquare = cubeLogic.calculateAllSquare(cube);
         return minSquare <= cubeSquare && cubeSquare <= maxSquare;

@@ -15,7 +15,7 @@ public class VolumeOfCubeSpecification implements Specification {
 
     @Override
     public boolean specify(Cube cube) {
-        CubeLogic cubeLogic = CubeLogic.getInstance();
+        CubeLogic cubeLogic = new CubeLogic();//CubeLogic.getInstance();
         int cubeVolume;
         cubeVolume = cubeLogic.calculateVolume(cube);
         return minSquare <= cubeVolume && cubeVolume <= maxSquare;
