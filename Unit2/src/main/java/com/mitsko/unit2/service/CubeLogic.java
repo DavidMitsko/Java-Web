@@ -4,14 +4,6 @@ import com.mitsko.unit2.entity.Cube;
 import com.mitsko.unit2.entity.impl.Point;
 
 public class CubeLogic {
-   /** private static CubeLogic instance = null;
-
-    public static CubeLogic getInstance(){
-        if(instance == null){
-            instance = new CubeLogic();
-        }
-        return instance;
-    }*/
 
     public int calculateVolume(Cube cube){
         int side = calculateSide(cube);

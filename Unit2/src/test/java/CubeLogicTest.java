@@ -1,10 +1,10 @@
 import com.mitsko.unit2.exception.DataFormatException;
-import com.mitsko.unit2.service.utils.PointsFileReader;
+import com.mitsko.unit2.service.util.PointsFileReader;
 import com.mitsko.unit2.entity.impl.CubeImpl;
 import com.mitsko.unit2.entity.impl.Point;
 import com.mitsko.unit2.exception.DAOException;
 import com.mitsko.unit2.service.CubeLogic;
-import com.mitsko.unit2.service.utils.StringOfPointsParser;
+import com.mitsko.unit2.service.util.StringOfPointsParser;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.mitsko.unit2.service.utils;
+package com.mitsko.unit2.service.util;
 
 import com.mitsko.unit2.exception.DAOException;
 import org.apache.logging.log4j.LogManager;
